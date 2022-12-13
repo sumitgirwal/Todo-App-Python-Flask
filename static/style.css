@@ -1,0 +1,63 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1800px; 
+    margin-left: 100px;   
+    margin-right: 100px;   
+}
+
+form {
+    
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+       
+}
+
+input {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    border-radius: 3px;
+    border-style: solid;
+    border-color: rgb(212, 209, 209);
+    border-width: 1px;
+    padding: 5px 8px 5px 8px;
+    width: 300px;
+}
+
+input::selection {
+    border: none;
+}
+
+.add-task-btn {
+    cursor: pointer;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(212, 209, 209);
+     
+    padding: 8px 8px 8px 8px;
+    margin-left: 0.1px;
+    z-index: 100;
+    
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+

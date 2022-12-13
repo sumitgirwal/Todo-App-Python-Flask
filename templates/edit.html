@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo Task App</title>
+	<link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="container">
+         
+
+        <h2>Todo App - Update</h2>
+        <a href="/"> < Back </a>
+		<form action="/edit/{{task.id}}" method="POST">
+			<div>
+				<input type="text" name="title" value="{{task.title}}">
+			</div>
+			<div>
+				 
+                <button class="add-task-btn" type="submit">
+					Update Task
+				</button>
+			</div>
+		</form>
+        
+        <br>
+    </div>
+	
+	 
+	
+</body>	
+</html>

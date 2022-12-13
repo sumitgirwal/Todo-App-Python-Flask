@@ -4,12 +4,19 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+# db config
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///todoapp.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
- 
 
+# Create db on first request
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
+
+# Model
 class Task(db.Model):
 	id = db.Column(db.Integer, primary_key = True)
 	title = db.Column(db.String(100), nullable = True)
@@ -18,35 +25,43 @@ class Task(db.Model):
 		return f"{self.id} - {self.title}"
 
 
-@app.route('/tasks', methods = ['GET', 'POST'])
+# Index page + Create a task
+@app.route('/', methods = ['GET', 'POST'])
 def tasks():
-	#create task
-	#db.create_all()
 	if request.method == 'POST':
 		title = request.form['title']
 		task = Task(title = title)
 		db.session.add(task)
 		db.session.commit()
 
-	#show tasks		
 	task_list = Task.query.all()
 	return render_template('index.html', task_list = task_list)				
 
 
+# Edit task
 @app.route('/edit/<int:id>', methods = ['GET', 'POST'])
-def edit(id):	
-	task = Task.query.filter_by(id = id).first()
-	return redirect('/tasks')					
+def edit(id):
+	task = Task.query.filter_by(id = id).first()	
+	if request.method == 'POST':
+		title = request.form['title']
+		task.title = title
+		db.session.commit()
+		return redirect('/')
+	return render_template('edit.html', task=task )						
 
-@app.route('/delete/<int:id>', methods = ['GET', 'POST'])
+
+# Delete task
+@app.route('/delete/<int:id>', methods = ['GET'])
 def delete(id):	
 	task = Task.query.filter_by(id = id).first()
 	db.session.delete(task)
 	db.session.commit()
-	return redirect('/tasks')				
+	return redirect('/')				
 
+
+# Main app
 if __name__ == '__main__':
-	app.run(debug = True, port = 8000)
+	app.run(debug=True, port=8000)
 
 
 

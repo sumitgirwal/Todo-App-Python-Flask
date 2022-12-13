@@ -1,32 +1,47 @@
-<form action="tasks" method="POST">
-	<input type="text" name="title">
-	<input type="submit" name="">
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo Task App</title>
+	<link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+	<div class="container">
 
+	
+		<h2>Todo App</h2>
+		<form  action="/" method="POST">
+			<div>
+				<input type="text" name="title" required>
+			</div>
+			<div>
+				<button class="add-task-btn" type="submit">
+					Add Task
+				</button>
+			</div>
+		</form>
+		<br>
+	
 
-<table>
-	<thead>
-		<th>
-			<td>#</td>
-			<td>Title</td>
-			<td>Date</td>
-			<td>Action</td>
-		</th>
-	</thead>
-	<tbody>
-		
+		<table>
+		<tr>
+			<th>#</th>
+			<th>Title</th>
+			<th>Date</th>
+			<th>Action</th>
+		</tr>
+
 			{% for task in task_list %}
 			<tr>
-				<td> {{loop.index}} </td>
-				<td> {{task.id}} </td>
-				<td> {{task.title}} </td>
-				<td> {{task.created_date}} </td>
-				<td> 
-					 <a href="edit/{{task.id}}" >Edit</a> 
-					 <a href="delete/{{task.id}}" >Delete</a>
+				<td>{{loop.index}}</td>
+				<td>{{task.title}}</td>
+				<td>{{task.created_date }}</td>
+				<td>
+					<a href="edit/{{task.id}}" >Edit</a> 
+					<a href="delete/{{task.id}}" >Delete</a>
 				</td>
 			</tr>
 			{% endfor %}
-			
-	</tbody>
-</table>
+		</table>
+	</div>
+</body>	
+</html>
